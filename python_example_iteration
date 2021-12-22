@@ -1,0 +1,41 @@
+# import boto3
+​
+def thing(**kwargs):
+    myids = kwargs['ids'] # list of ids (eg. ['i-1203921039', 'i-9823432432'])
+    if 'timeout' in kwargs.keys():
+        timeout_threshold = kwargs['timeout']
+    else:
+        timeout_threshold = 30 # 30 seconds by default
+​
+​
+    
+    returned_ids = [] # ids we can back from aws will go in here
+​
+    i = 1
+    while True:
+        if (i * 5) >= timeout_threshold:
+            raise CommandExecutionException("Unable to verify that targets were drained in {} seconds...".format(timeout_threshold))
+        
+        try:
+            health = alb_client.describe_target_health(**target_health_properties)['TargetHealthDescriptions']
+        except:
+            raise CommandExecutionException("Failed to get Target Group health properties for {}!".format(target_group_name))
+​
+        # determine if the ids we want removed are still there or if they're gone
+        # to accomplish this, we need to generate a list of ids that are returned by aws
+        for var1, var2 in health.items()
+            # iteration 1
+            #var 1 = "key1"
+            #var 2 = "value1"
+​
+            # iteration 2
+            #var 1 = "key2"
+            #var 2 = "value2"
+            returned_id = health['TargetHealth']['Id'] # determine id from aws output
+            returned_ids.append(returned_id) # add id to returned_ids list
+​
+        # do our comparison here... try sets
+        if they exist, sleep 5
+        if they do not exist, break
+    
+    return True, 'IDs "{}" removed from Target Group {} successfully!'.format(", ".join(myids), target_group_name)
