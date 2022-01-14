@@ -1,0 +1,166 @@
+My Python3 Cheatsheet
+
+Use for loop for iterating
+Use while loop when u have a set number of times u want to run something
+Anonymous function = lambda function
+
+
+Assignment Operators
+
++=       x+=5      x = x+5
+-=        x-=5       x = x-5
+*=        x*=5       x = x*5
+/=         x/=5       x = x/5
+%=       x%=5      x = x%5  Remainder
+//=        x//=5      x = x//5   
+**=       x**=5      x = x**5   Exponential
+
+==============================================================
+Python Dict Methods
+
+clear()	Removes all the elements from the dictionary
+copy()	Returns a copy of the dictionary
+fromkeys()	Returns a dictionary with the specified keys and value
+get()	Returns the value of the specified key
+items()	Returns a list containing a tuple for each key value pair
+keys()	Returns a list containing the dictionary's keys
+pop()	Removes the element with the specified key
+popitem()	Removes the last inserted key-value pair
+setdefault()	Returns the value of the specified key. If the key does not exist: insert the key, with the specified value
+update()	Updates the dictionary with the specified key-value pairs
+values()	Returns a list of all the values in the dictionary
+ 
+Python List Method
+
+append()	Adds an element at the end of the list
+clear()	Removes all the elements from the list
+copy()	Returns a copy of the list
+count()	Returns the number of elements with the specified value
+extend()	Add the elements of a list (or any iterable), to the end of the current list
+index()	Returns the index of the first element with the specified value
+insert()	Adds an element at the specified position
+pop()	Removes the element at the specified position
+remove()	Removes the first item with the specified value
+reverse()	Reverses the order of the list
+sort()	Sorts the list
+
+Python string Methods
+
+capitalize()	Converts the first character to upper case
+casefold()	Converts string into lower case
+center()	Returns a centered string
+count()	Returns the number of times a specified value occurs in a string
+encode()	Returns an encoded version of the string
+endswith()	Returns true if the string ends with the specified value
+expandtabs()	Sets the tab size of the string
+find()	Searches the string for a specified value and returns the position of where it was found
+format()	Formats specified values in a string
+format_map()	Formats specified values in a string
+index()	Searches the string for a specified value and returns the position of where it was found
+isalnum()	Returns True if all characters in the string are alphanumeric
+isalpha()	Returns True if all characters in the string are in the alphabet
+isascii()	Returns True if all characters in the string are ascii characters
+isdecimal()	Returns True if all characters in the string are decimals
+isdigit()	Returns True if all characters in the string are digits
+isidentifier()	Returns True if the string is an identifier
+islower()	Returns True if all characters in the string are lower case
+isnumeric()	Returns True if all characters in the string are numeric
+isprintable()	Returns True if all characters in the string are printable
+isspace()	Returns True if all characters in the string are whitespaces
+istitle()	Returns True if the string follows the rules of a title
+isupper()	Returns True if all characters in the string are upper case
+join()	Converts the elements of an iterable into a string
+ljust()	Returns a left justified version of the string
+lower()	Converts a string into lower case
+lstrip()	Returns a left trim version of the string
+maketrans()	Returns a translation table to be used in translations
+partition()	Returns a tuple where the string is parted into three parts
+replace()	Returns a string where a specified value is replaced with a specified value
+rfind()	Searches the string for a specified value and returns the last position of where it was found
+rindex()	Searches the string for a specified value and returns the last position of where it was found
+rjust()	Returns a right justified version of the string
+rpartition()	Returns a tuple where the string is parted into three parts
+rsplit()	Splits the string at the specified separator, and returns a list
+rstrip()	Returns a right trim version of the string
+split()	Splits the string at the specified separator, and returns a list
+splitlines()	Splits the string at line breaks and returns a list
+startswith()	Returns true if the string starts with the specified value
+strip()	Returns a trimmed version of the string
+swapcase()	Swaps cases, lower case becomes upper case and vice versa
+title()	Converts the first character of each word to upper case
+translate()	Returns a translated string
+upper()	Converts a string into upper case
+zfill()	Fills the string with a specified number of 0 values at the beginning
+==============================================================
+Dictionary consist of keys and values in { }
+Tuple consist values separates by commas in parenthesis ()
+List consist of values in a bracket [ ]
+
+Dictionaries
+
+dict = {'name': 'Jes', 'jano': 'JES'}
+>>> dict.keys()
+dict_keys(['name', 'jano'])
+
+>>> dict.values()
+dict_values(['Jes', 'JES'])
+
+How will you get all the keys from the dictionary?
+print dict.keys()   # Prints all the keys
+
+
+How will you get all the values from the dictionary?
+print dict.values()   # Prints all the values
+
+==============================================================
+
+Tuple Count
+
+my_tuple = ( ‘a’, ‘p’, ‘p’, ‘l’, ‘e’ )
+result = my_tuple.count(‘p’)
+print(result) #Output : 2
+
+result2 = my_tuple.index(‘p’)
+print(result2) #Output: 1       array [1]
+
+Other Tuple operators
+
+my_tuple = ( ‘a’, ‘p’, ‘p’, ‘l’, ‘e’ )
+print(‘a’ in my_tuple) # Output: True
+print(‘f’ in my_tuple) # Output: False
+
+==============================================================
+
+Iterating through a string
+
+count=0
+for letter in “hello world”:
+    if (letter ==‘l’):
+        count =+ 1
+
+print(count, ‘letters found’)
+
+==============================================================
+#Function
+
+def function_name(**kwargs):             ** represents can contain several arguments
+      If (kwargs == something):
+          print(“something”)
+
+result =function_name(“something”) 
+print(result) #Output something
+OR
+
+def square(x):             
+      return = x * x
+
+result = square(5) 
+print(result) #returns 25
+
+
+# Lambda Function
+square = lambda x: x*x
+
+# function call
+result = square(5) #Output result=25
+==============================================================
