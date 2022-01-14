@@ -8,8 +8,7 @@ def get_listener_ssl_policy(**kwargs):
     '''
     Gets the SSL Policy of an ALB Listener
     Example:
-        get_listener_ssl_policy \
-            alb_arn='...'
+        AWS_PROFILE=saml ./get_listener_ssl_policy alb_arn='...'
 
     Required parameters:
         alb_arn : ALB ARN value to filter results (str)

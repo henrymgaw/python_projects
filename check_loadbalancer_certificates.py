@@ -8,10 +8,7 @@ def show_albs(**kwargs):
     '''
     Gets the SSL Policy of an ALB Listener
     Example:
-        AWS_PROFILE=saml ./check_ssl_policies.py region=us-east-2 identifier='.*qa2.*'
-        show_albs \
-            region='...'
-            identifier='...'
+    AWS_PROFILE=saml ./check_loadbalancer_certificates.py region=us-west-2 identifier='.*dev3.*'
 
     Required parameters:
         region     : AWS region (str)
@@ -40,20 +37,19 @@ def show_albs(**kwargs):
 
     for alb_data in alb_data_all:
         if identifier.match(alb_data['LoadBalancerName']):
-            get_listener_ssl_policy(alb_data['LoadBalancerArn'], alb_data['LoadBalancerName'], region)
+            check_loadbalancer_certificates(alb_data['LoadBalancerArn'], alb_data['LoadBalancerName'], region)
 
-
-def get_listener_ssl_policy(alb_arn, alb_name, region):
+def check_loadbalancer_certificates(alb_arn, alb_name, region):
     '''
-    Gets the SSL Policy of an ALB Listener
+    Checks a loadbalancer to see if it is matches certificate arn of a wildcard certificate *.cep.us-west-2.dev3.neo.evbg.io if so return name of loadbalancer
     Example:
-        get_listener_ssl_policy \
-            alb_arn='...'
+    AWS_PROFILE=saml ./check_loadbalancer_certificates.py region=us-west-2 identifier='.*dev3.*'
 
     Required parameters:
         alb_arn : ALB ARN value to filter results (str)
         region  : AWS region (str)
     '''
+
     alb_client = boto3.client('elbv2', region_name=region)
 
     listener_properties = {}
@@ -62,14 +58,22 @@ def get_listener_ssl_policy(alb_arn, alb_name, region):
     try:
         listener_properties['LoadBalancerArn'] = alb_arn
         response = alb_client.describe_listeners(**listener_properties)['Listeners']
+        #print(response)
     except Exception as e:
         raise Exception("Exception occured: {}".format(e))
 
-    # now that we have our listener data, let's get the SSL policy. note: since we are only passing a single alb_arn, we only care about the first/only item in the list
-    if 'SslPolicy' in response[0].keys():
-        if response[0]['SslPolicy'] != 'ELBSecurityPolicy-TLS-1-2-Ext-2018-06':
-            print('Found out of date SSL Policy! ALB: {} // Current Policy: {}'.format(alb_name, response[0]['SslPolicy']))
+  # now that we have our listener data, let's get the SSL policy. note: since we are only passing a single alb_arn, we only care about the first/only item in the list
+    if 'Certificates' in  response[0].keys():
+        certificatearn = response[0]['Certificates'][0]['CertificateArn']
+        lb_name = response[0]['ListenerArn']
+        #*.cep.us-west-2.dev3.neo.evbg.io cert arn
+        if certificatearn == 'arn:aws:acm:us-west-2:360915197767:certificate/cb9586d1-76c4-4c30-ba23-2c6e3e095c6d':
+           print(lb_name.split('/')[2])
+        #*.dev3.dev.evbg.io cert arn
+        elif certificatearn == 'arn:aws:acm:us-west-2:360915197767:certificate/3b034735-49f7-423c-a5c3-3c3e8dafaaaf':
+           print(lb_name.split('/')[2])
 
+# call above function. we are parsing kwargs passed via command line so the downstream function can parse them as kwargs. we could just change these to args for both functions if we want
 if __name__ == '__main__':
-    # call function. we are parsing kwargs passed via command line so the downstream function can parse them as kwargs. we could just change these to args for both functions if we want
+    #check_loadbalancer_certificates(**dict(arg.split('=') for arg in sys.argv[1:]))
     show_albs(**dict(arg.split('=') for arg in sys.argv[1:]))
