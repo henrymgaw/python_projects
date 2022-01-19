@@ -1,0 +1,2 @@
+# datadog library : https://github.com/DataDog/datadogpy
+datadog==0.35.0
