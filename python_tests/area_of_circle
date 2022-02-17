@@ -1,0 +1,11 @@
+#!/usr/local/bin/python3
+# Area = pi * r2
+# where r is radius of circle
+
+def area_of_circle(r):
+    pi=3.14
+    area= pi * r * r
+    return area
+
+circle=area_of_circle(3)
+print("Area of a circle you entered is:" + str(circle))

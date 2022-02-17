@@ -1,0 +1,8 @@
+#!/usr/local/bin/python3
+def reverse_string(text):
+#    for t in text:
+     text = text[::-1], text[::1]
+     return text
+
+out=reverse_string("hello")
+print(out)

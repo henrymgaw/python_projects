@@ -1,0 +1,13 @@
+#!/usr/local/bin/python3
+arr = {20, 10, 20, 4, 100}
+
+def largest_number(num):
+    for n in num:
+        max = 0
+        if n > max:
+            max = n
+        elif n < max:
+            print("number is smaller than max")
+    print(max)
+
+largest_number((20, 10, 20, 4, 100))

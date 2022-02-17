@@ -1,0 +1,79 @@
+#!/usr/local/bin/python3
+"""
+
+text="Tutorials POINT"
+upper=0
+lower=0
+
+for t in text:
+    if t.isupper():
+        upper+=1
+    elif t.islower():
+        lower+=1
+    else:
+        pass
+
+print("Total number of Upper case letters is")
+print(upper)
+print("Total number of lower letter case letters is")
+print(lower)
+
+
+"""
+
+"""
+convert into a function
+
+
+
+def count_upper_and_lower(text):
+    #text="Tutorials POINT"
+    upper=0
+    lower=0
+    
+    for t in text:
+        if t.isupper():
+            upper+=1
+        elif t.islower():
+            lower+=1
+        else:
+            pass
+    
+    print("Total number of Upper case letters is")
+    print(upper)
+    print("Total number of lower letter case letters is")
+    print(lower)
+    return str(upper) + "Upper" + str(lower) + "lower"
+
+out=count_upper_and_lower("Hello Henry Gaw")
+print(out)
+
+
+"""
+
+
+
+
+""""
+function that now takes a user argument
+"""
+
+def count_upper_and_lower(text):
+    #text="Tutorials POINT"
+    upper=0
+    lower=0
+
+    for t in text:
+        if t.isupper():
+            upper+=1
+        elif t.islower():
+            lower+=1
+        else:
+            pass
+
+    print("Total number of Upper case letters is:" + str(upper) )
+    print("Total number of lower letter case letters is:" + str(lower))
+    #return str(upper) + "Upper" + str(lower) + "lower"
+
+out=count_upper_and_lower(input("Enter text to count Upper and Lower characters:"))
+print(out)

@@ -1,0 +1,10 @@
+#!/usr/local/bin/python3
+list=[100, 200, 300, 400, 0, 500]
+
+def sum(list):
+    total=0
+    for n in  list:
+        total += n
+    print(total)
+
+sum((100, 200, 300, 400, 0, 500))

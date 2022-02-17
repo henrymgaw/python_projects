@@ -1,0 +1,32 @@
+#!/usr/local/bin/python3
+
+input = [12, 35, 9, 56, 24]
+#Output = [24, 35, 9, 56, 12]
+print("Initial Input:" + str(input) )
+#temp=[]
+#for n in input:
+#    if n==12:
+#        temp.append(12)
+#    elif n==24:
+#        temp.append(24)
+#    else:
+#        pass
+
+input[0] = 24
+input[4] = 12
+print("Updated Input:" + str(input))
+
+
+"""
+Smart way
+def swapList(newList):
+     
+    newList[0], newList[-1] = newList[-1], newList[0]
+ 
+    return newList
+     
+# Driver code
+newList = [12, 35, 9, 56, 24]
+print(swapList(newList))
+
+"""
