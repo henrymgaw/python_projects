@@ -319,10 +319,14 @@ echo -e "\nInstalling extra packages..."
 salt-call state.apply salt-configs.master.extra_pkgs.gpg saltenv=$saltenv || exit 1
 echo -e "\nConfiguring GPG..."
 salt-call state.apply salt-configs.master.gpg_config saltenv=$saltenv || exit 1
+echo -e "\nConfiguring Salt Minion..."
+salt-call state.apply salt-configs.minion saltenv=$saltenv || exit 1
+service salt-minion restart
+salt-call mine.update
 echo -e "\nConfiguring Salt Master mine functions..."
 salt-call state.apply salt-configs.master.mine_master saltenv=$saltenv || exit 1
 salt-call mine.update
-echo -e "\nConfiguring Salt Master..."
+echo -e "\nApplying highstate..."
 salt-call state.apply saltenv=$saltenv || exit 1
 
 echo -e "\nHighstate Successful!"
