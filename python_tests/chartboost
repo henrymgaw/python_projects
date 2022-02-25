@@ -1,0 +1,49 @@
+## Sum to 100
+
+### Question
+# Given an array of integers `nums` ranges from 1 to 99, print pairs of two numbers in the array that they add up to 100.
+# You may not use the same element twice. But there may be elements with duplicate numbers.
+
+# Output format is flexible, for example both (x,y) and [x,y] work.
+
+### Example
+# [32,68,73,99] -> (32,68)
+# [1,2,99] -> (1,99)
+# [1,1,1,99,99] -> (1,99) (1,99)
+
+#nums=[1,2,99]
+#nums2=nums.copy()
+
+#def sum_to_100(nums):
+#    for n1 in nums[::1]:
+#        for n2 in nums2[::2]:
+#            if n1 + n2 == 100:
+#                print("First Number: {}, {}".format(str(n1),str(n2)))
+#            elif n1 + n2 != 100:
+#                print("2 values added did not equal to 100")
+#            else:
+#                pass
+#    return
+#
+#out=sum_to_100(nums)
+#print(out)
+nums=[1,1,1,99,99]
+
+def sum_to_100(nums):
+    for i in range(0, len(nums)):
+        n1 = nums[i]
+        num2={} # {0:1, x x, x, x}  dict.pop{num2}
+        num2.update({i: n1}) # num2[i] = n1
+        print(num2)
+        for j in range(i+1, len(nums)):
+            n2 = nums[j]
+            if n1 + n2 == 100:
+                num2.pop()
+                print("First Number: {}, {}".format(str(n1),str(n2)))
+            elif n1 + n2 != 100:
+                print("2 values added did not equal to 100")
+            else:
+                pass
+
+out=sum_to_100(nums)
+print(out)     
