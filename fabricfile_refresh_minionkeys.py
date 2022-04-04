@@ -22,13 +22,14 @@ from invoke import Responder
 
 def refresh_minion_keys(server):
     sudopass = Responder(pattern = r"\[sudo\] password for henry.gaw: ", response = "$kyler12@@")
-    c = Connection(host=server, forward_agent=True, gateway=Connection('bastion-1.cep.us-west-2.prd1.int.evbg.io'), connect_kwargs = {"password": "$kyler12@@"})
+    #c = Connection(host=server, forward_agent=True, gateway=Connection('bastion-1.cep.us-west-2.prd1.int.evbg.io'), connect_kwargs = {"password": "$kyler12@@"})
+    c = Connection(host=server, forward_agent=True, gateway=Connection('bastion-1.cep.eu-central-1.prdeu1.int.evbg.io'), connect_kwargs = {"password": "$kyler12@@@"})
     return c.run(f"sudo systemctl stop salt-minion; sudo rm -f /etc/salt/pki/minion/minion_master.pub;sudo systemctl start salt-minion", pty=True, watchers = [sudopass])
 
 #Update your list if servers here
 servers = [
-'jenkins-slave01', 
-'jenkins-master01'
+'akka02.ne08.cep.eu-central-1.prdeu1.int.evbg.io', 
+'akka02.ne07.cep.eu-central-1.prdeu1.int.evbg.io'
 ]
 
 for server in servers:

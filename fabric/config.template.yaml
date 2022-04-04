@@ -1,0 +1,4 @@
+user: user.name
+serial: True # setting this to 'False' will attempt to run executions against hosts in parallel
+bastion: bastion.fqdn
+host_file: hosts.txt

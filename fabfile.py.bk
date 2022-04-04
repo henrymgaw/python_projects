@@ -1,0 +1,28 @@
+#!/usr/local/bin/python3
+"""
+
+Used to restart salt-minion services
+
+"""
+
+
+from fabric import Connection, Config
+from getpass import getpass
+
+def restart_saltminion_service(host):
+    user = 'henry.gaw'
+    sudopass = getpass("[sudo] password for " +  str(user) + ": ")
+    config = Config(overrides={'sudo': {'password': sudopass}})
+    c = Connection('henry.gaw@bastion-1.cep.us-east-1.prd1.int.evbg.io', config=config )
+    #c = Connection('henry.gaw@bastion-1.cep.us-east-1.prd1.int.evbg.io')
+    #return c.run("sudo su -c 'systemctl restart salt-minion'")
+    #return c.sudo('/bin/systemctl restart datadog-agent', user='henry.gaw')
+    return c.run("sudo su - root -c 'service datadog-agent restart'")
+
+hosts = [
+'cep-salt1.cep.us-east-1.prd1.int.evbg.io'
+]
+for host in hosts:
+    out=restart_saltminion_service(host)
+    print(out)
+    #print("{}: {}".format(host, restart_saltminion_service(host)))

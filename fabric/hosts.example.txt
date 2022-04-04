@@ -1,0 +1,3 @@
+consul01.cep.us-east-2.qa2.neo.evbg.io
+consul02.cep.us-east-2.qa2.neo.evbg.io
+consul03.cep.us-east-2.qa2.neo.evbg.io

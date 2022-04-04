@@ -1,0 +1,30 @@
+#!/usr/local/bin/python3
+"""
+Given a list of numbers, write a Python program to remove multiple elements from a list based on the given condition.
+
+Example: 
+
+Input: [12, 15, 3, 10]
+Output: Remove = [12, 3], New_List = [15, 10]
+
+Input: [11, 5, 17, 18, 23, 50]
+Output: Remove = [1:5], New_list = [11, 50]
+
+"""
+def remove_mult_elements(list1):
+    list1 = [ele for ele in list1 if ele not in unwanted_num]
+    return list1
+#    for r1 in i:
+#        print("first loop")
+#        print(r1)
+#        for r2 in o:
+#            print("second loop")
+#            print(r2)
+#            if r2 in i:
+#               i.pop(r1)
+#    return i
+
+list1=[12, 15, 3, 10]
+unwanted_num=[12, 3]
+out=remove_mult_elements(list1)
+print(out)

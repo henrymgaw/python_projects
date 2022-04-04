@@ -1,0 +1,4 @@
+user: henry.gaw
+serial: True # setting this to 'False' will attempt to run executions against hosts in parallel
+bastion: bastion-1.cep.us-west-2.dev3.neo.evbg.io
+host_file: hosts.txt
