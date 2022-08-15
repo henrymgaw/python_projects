@@ -1,0 +1,67 @@
+#!/usr/local/bin/python3
+# https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html
+import logging
+import boto3
+from botocore.exceptions import ClientError
+import os
+
+def sync_to_s3_with_role(bucket, file_name, object_name, env):
+    sts_client = boto3.client('sts')
+
+    if object_name is None:
+        object_name = os.path.basename(file_name)    
+
+    # switch between preprod and prod ARN and a role session name.
+    if env == "preprod":
+        assumed_role_object=sts_client.assume_role(
+    # Must update Trusted relationship with KDP account RoleArn="arn:aws:iam::360915197767:role/dev-preprod-eks-ue1-1-eks-workers"
+    # cep-s3-saltmaster-init-sync role was created manually in pre-prod and prod accounts
+            RoleArn="arn:aws:iam::360915197767:role/cep-s3-saltmaster-init-sync",
+            RoleSessionName="AssumePreProdRole"
+        )
+        credentials=assumed_role_object['Credentials']
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=credentials['AccessKeyId'],
+            aws_secret_access_key=credentials['SecretAccessKey'],
+            aws_session_token=credentials['SessionToken'],
+        )
+        try:
+            response = s3_client.upload_file(file_name, bucket, object_name)
+            s3_client.upload_file('saltmaster_init.tpl', bucket, 'saltmaster_init.tpl')
+        except ClientError as e:
+            logging.error(e)
+            return False
+        return True
+
+    elif env == "prod":
+        assumed_role_object=sts_client.assume_role(
+            RoleArn="arn:aws:iam::214792946631:role/cep-s3-saltmaster-init-sync",
+            RoleSessionName="AssumeProdRole"
+        )
+        credentials=assumed_role_object['Credentials']
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=credentials['AccessKeyId'],
+            aws_secret_access_key=credentials['SecretAccessKey'],
+            aws_session_token=credentials['SessionToken'],
+        )
+        try:
+            response = s3_client.upload_file(file_name, bucket, object_name)
+            s3_client.upload_file('saltmaster_init.tpl', bucket, 'saltmaster_init.tpl')
+        except ClientError as e:
+            logging.error(e)
+            return False
+        return True
+
+env=os.environ.get("env")
+if env == "preprod":
+    for bucket in ('hgaw-vmop', 'hgaw-vmop-east2', 'cep-saltmaster-init'):
+        sync_to_s3_with_role(bucket, file_name='saltmaster_init.tpl', object_name='saltmaster_init.tpl', env='preprod')
+        print(bucket)
+elif env == "prod":
+    for bucket in ('cep-vmop-east-1', 'cep-vmop-east-2', 'cep-saltmaster-init2', 'cep-vmop-eucentral1'):
+        sync_to_s3_with_role(bucket, file_name='saltmaster_init.tpl', object_name='saltmaster_init.tpl', env='prod')
+        print(bucket)
+else:
+    print("Environment not set")

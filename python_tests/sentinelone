@@ -1,0 +1,20 @@
+#!/usr/local/bin/python3
+list=[1,5,15,10,25]
+compare=0
+compare2=50
+compare3=100
+
+#expected output is 15
+#question is find the number that find the second max number?
+
+def second_highest(list):
+    for l in list:
+        if l > compare:
+            highest = l
+        elif l <  compare3 and l > compare2:
+            middle = l
+        elif  l < compare:
+            lowest = l
+        return highest 
+
+second_highest(list)

@@ -1,0 +1,8 @@
+def rev(list1):
+    rev_word=list1[::-1]
+    print(rev_word)
+    
+
+s="the sky is blue"
+list1=s.split(" ")
+rev(list1)

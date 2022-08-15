@@ -1,0 +1,55 @@
+#!/usr/local/bin/python3
+# receive two sorted lists as inputs
+# return a sorted list that is the merge of the two inputs without repetitions
+
+list1=[1,2,7]
+list2=[3,7,8]
+
+def join_lists(list1,list2):
+    list3=list1+list2
+    final_list=set(list3)
+    return final_list.sorted
+    
+join_lists(list1,list2)
+
+
+[1,2,3,7,8]
+
+read1
+read2
+
+file1 = sorted list of userIDs that have booked a flight
+file2 = sorted list of userIDs that have booked an hotel
+
+fileout = sorted list of userIDs that have booked a flight OR hotel
+
+uid1 = read(file1)
+uid2 = read(file2)
+
+uid=[]
+
+def find_intersection(file1,file2):
+    for f in file1:
+        for h in file2:
+            if h in f:
+               uid=h.append()
+            else:
+               echo("uid is unique")
+    return uid.sorted
+    
+find_intersection(file1,file2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
