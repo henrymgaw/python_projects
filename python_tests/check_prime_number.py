@@ -1,6 +1,7 @@
 #! /usr/local/bin/python3
-num = input("Enter a number to see if its a prime number: ")
-num = int(num)
+#meaning of prime number is not divisible and returns a remainder
+
+num = int(input("Enter a number to see if its a prime number: "))
 
 flag=1
 for i in range(2, num):
